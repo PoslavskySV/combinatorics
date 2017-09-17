@@ -4,7 +4,6 @@ import org.junit.Assert;
 import org.junit.Test;
 
 import java.util.Arrays;
-import java.util.Comparator;
 import java.util.Set;
 import java.util.TreeSet;
 
@@ -61,7 +60,7 @@ public class IntDistinctTuplesPortTest {
 
         int[] arr = {1, 2, 3};
         Set<int[]> expected = new TreeSet<>(arrayComparator);
-        for (int[] a : Combinatorics.createIntGenerator(3, 3))
+        for (int[] a : Combinatorics.combinations(3, 3))
             expected.add(permute(arr, a));
 
         Assert.assertEquals(actual, expected);

@@ -26,7 +26,7 @@ public final class Combinatorics {
      * @return an iterator over all combinations (with permutations) to choose k numbers from n numbers.
      * @see IntCombinatorialGenerator
      */
-    public static IntCombinatorialGenerator createIntGenerator(int n, int k) {
+    public static IntCombinatorialGenerator combinations(int n, int k) {
         if (n < k)
             throw new IllegalArgumentException();
         if (n == k)
