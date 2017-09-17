@@ -9,13 +9,13 @@ Enumerate all possible permutations of a set of elements (note that intermediate
 
 ```java
 
-// will print all 3! = 6 permutations [0, 1, 2], [0, 2, 1], ....
+// print all 3! = 6 permutations [0, 1, 2], [0, 2, 1], ....
 Combinatorics.permutations(3)
     .stream()
     .map(Arrays::toString)
     .forEach(System.out::println);
 
-// will print all 3! = 6 permutations ["a", "b", "c"], ["a", "c", "b"], ....
+// print all 3! = 6 permutations ["a", "b", "c"], ["a", "c", "b"], ....
 Combinatorics.permutations(new String[]{"a", "b", "c"})
     .stream()
     .map(Arrays::toString)
@@ -29,13 +29,13 @@ Enumerate all possible unordered combinations of `k` elements chosen from `n` (n
 
 ```java
 
-// will print all 3!/2! = 3 unordered 2-combinations [0, 1], [0, 2] and [1, 2]
+// print all 3!/2! = 3 unordered 2-combinations [0, 1], [0, 2] and [1, 2]
 Combinatorics.combinations(3, 2)
     .stream()
     .map(Arrays::toString)
     .forEach(System.out::println);
 
-// will print all 3!/2! = 3 unordered 2-combinations ["a", "b"], ["a", "c"] and ["b", "c"]
+// print all 3!/2! = 3 unordered 2-combinations ["a", "b"], ["a", "c"] and ["b", "c"]
 Combinatorics.combinations(new String[]{"a", "b", "c"}, 2)
     .stream()
     .map(Arrays::toString)
@@ -49,13 +49,13 @@ Enumerate all possible ordered combinations of `k` elements chosen from `n` (not
 
 ```java
 
-// will print all 3!/(3-2)! = 6 2-combinations [0, 1], [1, 0], [0, 2], ...
+// print all 3!/(3-2)! = 6 2-combinations [0, 1], [1, 0], [0, 2], ...
 Combinatorics.combinationsWithPermutations(3, 2)
     .stream()
     .map(Arrays::toString)
     .forEach(System.out::println);
 
-// will print all 3!/(3-2)! = 6 2-combinations ["a", "b"], ["b", "a"], ["a", "c"], ...
+// print all 3!/(3-2)! = 6 2-combinations ["a", "b"], ["b", "a"], ["a", "c"], ...
 Combinatorics.combinationsWithPermutations(new String[]{"a", "b", "c"}, 2)
     .stream()
     .map(Arrays::toString)
@@ -135,7 +135,7 @@ Combinatorics.distinctTuples(set1, set2, set3)
 
 ## Historical note
 
-The code was initially written for the Redberry computer algebra system (redberry.cc), but then was moved into a separate artifact.
+The code was initially written as a part of Redberry computer algebra system (http://redberry.cc), but then was moved into a separate artifact.
 
 ## Maven
 
