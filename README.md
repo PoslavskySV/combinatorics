@@ -133,13 +133,17 @@ Combinatorics.distinctTuples(set1, set2, set3)
     
 ```
 
+## Historical note
+
+The code was initially written for the Redberry computer algebra system (redberry.cc), but then was moved into a separate artifact.
+
 ## Maven
 
 ```xml
 <dependency>
     <groupId>cc.redberry</groupId>
     <artifactId>combinatorics</artifactId>
-    <version>1.0</version>
+    <version>2.0</version>
 </dependency>
 ```
 
