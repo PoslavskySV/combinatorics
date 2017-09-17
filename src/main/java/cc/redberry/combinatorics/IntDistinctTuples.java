@@ -45,7 +45,7 @@ public final class IntDistinctTuples implements IntCombinatorialPort {
     private byte state = -1;
 
     /**
-     * Create iterator over distinct tuples formed from the specified arrays
+     * Create iterator over distinct tuples formed from the specified arrays (each set will be sorted in place)
      */
     public IntDistinctTuples(int[]... sets) {
         int maxIndex = 0;

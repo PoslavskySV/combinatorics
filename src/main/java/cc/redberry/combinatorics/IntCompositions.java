@@ -6,7 +6,7 @@ package cc.redberry.combinatorics;
  * <p>Implementation note: the description of the algorithm can be found here <a href="https://stackoverflow.com/a/6609080/946635">https://stackoverflow.com/a/6609080/946635</a>
  *
  * @author Stanislav Poslavsky
- * @since 1.0
+ * @since 2.0
  */
 public final class IntCompositions implements IntCombinatorialPort {
     private static final long serialVersionUID = 7938373353634964549L;

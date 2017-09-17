@@ -68,7 +68,14 @@ public final class Combinatorics {
      * @see IntDistinctTuples
      */
     public static CombinatorialIterator<int[]> distinctTuples(int[]... sets) {
-        return new IntCombinatorialPort.Iterator(new IntDistinctTuples(sets));
+        return new IntCombinatorialPort.Iterator(new IntDistinctTuples(deepClone(sets)));
+    }
+
+    private static int[][] deepClone(int[][] sets) {
+        sets = sets.clone();
+        for (int i = 0; i < sets.length; i++)
+            sets[i] = sets[i].clone();
+        return sets;
     }
 
     /**
@@ -220,8 +227,8 @@ public final class Combinatorics {
     }
 
     /**
-     * Iterator over all distinct N-tuples (distinct with respect to position in array), which can be chosen from {@code
-     * N} specified sets of integers.
+     * Iterator over all N-tuples of elements at different positions, which can be chosen from {@code N} specified sets
+     * of elements.
      *
      * @param sets array of sets of integers
      * @see IntDistinctTuples
@@ -231,7 +238,7 @@ public final class Combinatorics {
     }
 
     /**
-     * Iterator over all distinct N-tuples, which can be chosen from {@code N} specified sets of integers.
+     * Iterator over all N-tuples, which can be chosen from {@code N} specified sets of integers.
      *
      * @param sets array of sets of integers
      * @see IntDistinctTuples

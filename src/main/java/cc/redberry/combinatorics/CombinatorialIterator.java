@@ -39,7 +39,7 @@ public interface CombinatorialIterator<T>
     default Stream<T> stream() { return StreamSupport.stream(this.spliterator(), false);}
 
     /**
-     * Write all elements of this to list
+     * Write all elements of this iterable to list
      */
     default List<T> toList() {
         List<T> list = new ArrayList<>();
