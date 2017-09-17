@@ -1,4 +1,4 @@
-[![Build Status](https://travis-ci.org/PoslavskySV/combinatorics.svg?branch=master)](https://travis-ci.org/PoslavskySV/combinatorics)
+[![Javadocs](http://www.javadoc.io/badge/cc.redberry/combinatorics.svg)](http://www.javadoc.io/doc/cc.redberry/combinatorics) [![Build Status](https://travis-ci.org/PoslavskySV/combinatorics.svg?branch=master)](https://travis-ci.org/PoslavskySV/combinatorics)
 
 # Combinatorics for Java
 `Combinatorics` effectively implements a number of combinatorial algorithms for enumerating (without in-memory storing) of different types of combinations.
