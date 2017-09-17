@@ -1,5 +1,7 @@
 package cc.redberry.combinatorics;
 
+import java.io.Serializable;
+
 /**
  * This interface is common for all combinatorial iterators.
  *
@@ -7,14 +9,14 @@ package cc.redberry.combinatorics;
  * @author Stanislav Poslavsky
  * @since 1.0
  */
-public interface IntCombinatorialPort extends OutputPort<int[]> {
+public interface IntCombinatorialPort extends Serializable {
     /**
      * Resets the iteration
      */
     void reset();
 
     /**
-     * Returns the reference to the current iteration element.
+     * Returns the reference to the current iteration element
      *
      * @return the reference to the current iteration element
      */
@@ -25,6 +27,37 @@ public interface IntCombinatorialPort extends OutputPort<int[]> {
      *
      * @return the next combination or null, if no more combinations exist
      */
-    @Override
     int[] take();
+
+    final class Iterator extends IntCombinatorialIterator {
+        final IntCombinatorialPort port;
+        private int[] next;
+
+        public Iterator(IntCombinatorialPort port) {
+            this.port = port;
+            this.next = port.take();
+        }
+
+        @Override
+        public void reset() {
+            port.reset();
+        }
+
+        @Override
+        public int[] current() {
+            return port.getReference();
+        }
+
+        @Override
+        public boolean hasNext() {
+            return next != null;
+        }
+
+        @Override
+        public int[] next() {
+            int[] current = next.clone();
+            next = port.take();
+            return current;
+        }
+    }
 }

@@ -4,18 +4,19 @@ import java.util.Arrays;
 import java.util.BitSet;
 
 /**
- * This class represents an iterator (implemented in the output port pattern) over all distinct N-tuples, which can be
- * chosen from {@code N} sets of integers. More formally, for {@code N} integer arrays: <i>array</i><sub>1</sub>,
- * <i>array</i><sub>2</sub>,...,<i>array</i><sub>N</sub>, this class allows to iterate over all possible integer arrays
- * of the form [i<sub>1</sub>, i<sub>2</sub>,...,i<sub>N</sub>], where all numbers numbers i<sub>j</sub> are different
- * and i<sub>1</sub> is chosen from <i>array</i><sub>1</sub>, i<sub>2</sub> is chosen from <i>array</i><sub>2</sub> and
- * so on.</p> <p/> <p>Consider the example:
+ * Iterator over all distinct N-tuples, which can be chosen from {@code N} sets of integers. More formally, for {@code
+ * N} integer arrays: <i>array</i><sub>1</sub>, <i>array</i><sub>2</sub>,...,<i>array</i><sub>N</sub>, this class allows
+ * to iterate over all possible integer arrays of the form [i<sub>1</sub>, i<sub>2</sub>,...,i<sub>N</sub>], where all
+ * numbers numbers i<sub>j</sub> are different and i<sub>1</sub> is chosen from <i>array</i><sub>1</sub>, i<sub>2</sub>
+ * is chosen from <i>array</i><sub>2</sub> and so on.
+ *
+ * <p>Consider the example:
  * <code><pre>
  * int[] a1 = {1, 2, 3};
  * int[] a2 = {2, 3};
- * DistinctCombinationsPort dcp = new DistinctCombinationsPort(a1, a2);
+ * IntDistinctTuples tuples = new IntDistinctTuples(a1, a2);
  * int[] tuple;
- * while ((tuple = dcp.take()) != null)
+ * while ((tuple = tuples.take()) != null)
  *      System.out.println(Arrays.toString(tuple));
  * </pre></code>
  * This code will produce the following sequence:
@@ -25,23 +26,28 @@ import java.util.BitSet;
  * [2, 3]
  * [3, 2]
  * </pre></code>
- * </p> <p/> <p>This class is implemented via output port pattern and the calculation of the next tuple occurs only on
- * the invocation of {@link #take()}.</p> <p/> <p><b>Note:</b> method {@link #take()} returns the same reference on each
- * invocation. So, if it is needed not only to obtain the information from {@link #take()}, but also save the result, it
- * is necessary to clone the returned array.</p>
+ *
+ * <p>This class is implemented via output port pattern and the calculation of the next tuple occurs only on the
+ * invocation of {@link #take()}.
+ *
+ * <p><b>Note:</b> method {@link #take()} returns the same reference on each invocation.
  *
  * @author Dmitry Bolotin
  * @author Stanislav Poslavsky
  * @since 1.0
  */
-public class IntDistinctTuplesPort implements IntCombinatorialPort {
+public final class IntDistinctTuples implements IntCombinatorialPort {
+    private static final long serialVersionUID = -7599542899697602636L;
     private final BitSet previousMask;
     private final BitSet[] setMasks;
     private final int[] combination;
     private final BitSet temp;
     private byte state = -1;
 
-    public IntDistinctTuplesPort(int[]... sets) {
+    /**
+     * Create iterator over distinct tuples formed from the specified arrays
+     */
+    public IntDistinctTuples(int[]... sets) {
         int maxIndex = 0;
         for (int[] set : sets) {
             if (set.length == 0)

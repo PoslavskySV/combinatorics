@@ -3,11 +3,9 @@ package cc.redberry.combinatorics;
 import java.util.Arrays;
 
 /**
- * This class allows to iterate over all N-tuples (not necessary to be distinct), which can be
- * chosen from {@code N} arrays of integers of the form
- * <i>array</i><sub>i</sub> = [0, 1, 2, ..., K<sub>i</sub>].
- * <br></br>For example, if a set of arrays length is {K<sub>i</sub>} = [2,3,2],
- * then the following tuples will be produced
+ * Iterator over all N-tuples (not necessary to be distinct), which can be chosen from {@code N} arrays of integers of
+ * the form <i>array</i><sub>i</sub> = [0, 1, 2, ..., K<sub>i</sub>]. <br>For example, if a set of arrays length is
+ * {K<sub>i</sub>} = [2,3,2], then the following tuples will be produced
  * <code><pre>
  *    arr      lastUpdateDepth
  * [0, 0, 0]          0
@@ -23,24 +21,22 @@ import java.util.Arrays;
  * [1, 2, 0]          1
  * [1, 2, 1]          2
  * </pre></code>
- * <p/>
- * <p>This class is implemented via output port pattern and the calculation of the next
- * tuple occurs only on the invocation of {@link #take()}.</p>
+ *
+ * <p>Calculation of the next tuple occurs only on the invocation of {@link #take()}.
+ *
  * <p><b>Note:</b> method {@link #take()} returns the same reference on each invocation.
- * So, if it is needed not only to obtain the information from {@link #take()}, but also save the result,
- * it is necessary to clone the returned array.</p>
  *
  * @author Dmitry Bolotin
  * @author Stanislav Poslavsky
  * @since 1.0
  */
-public final class IntTuplesPort implements IntCombinatorialPort {
-
+public final class IntTuples implements IntCombinatorialPort {
+    private static final long serialVersionUID = 4430122598334056882L;
     private final int[] upperBounds;
     private int[] current;
     private int lastUpdateDepth = -1;
 
-    public IntTuplesPort(final int... upperBounds) {
+    public IntTuples(final int... upperBounds) {
         checkWithException(upperBounds);
         this.upperBounds = upperBounds;
         this.current = new int[upperBounds.length];

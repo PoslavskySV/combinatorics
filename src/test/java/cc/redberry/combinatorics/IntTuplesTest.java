@@ -9,11 +9,11 @@ import java.util.Arrays;
  * @author Dmitry Bolotin
  * @author Stanislav Poslavsky
  */
-public class IntTuplesPortTest {
+public class IntTuplesTest {
 
     @Test
     public void test1() {
-        IntTuplesPort port = new IntTuplesPort(3, 3, 3);
+        IntTuples port = new IntTuples(3, 3, 3);
         int count = 0;
         while (port.take() != null)
             ++count;
@@ -22,7 +22,7 @@ public class IntTuplesPortTest {
 
     @Test
     public void test2() {
-        IntTuplesPort port = new IntTuplesPort(4, 4, 4, 4);
+        IntTuples port = new IntTuples(4, 4, 4, 4);
         int count = 0;
         while (port.take() != null)
             ++count;
@@ -48,7 +48,7 @@ public class IntTuplesPortTest {
 
         int[] luds = {0, 2, 1, 2, 1, 2, 0, 2, 1, 2, 1, 2};
 
-        IntTuplesPort port = new IntTuplesPort(2, 3, 2);
+        IntTuples port = new IntTuples(2, 3, 2);
         int i = 0;
         int[] r;
         while ((r = port.take()) != null) {
@@ -59,7 +59,7 @@ public class IntTuplesPortTest {
 
     @Test
     public void test3() {
-        IntTuplesPort port = new IntTuplesPort(3, 2, 2);
+        IntTuples port = new IntTuples(3, 2, 2);
         int[] c;
         while ((c = port.take()) != null) {
             System.out.println(Arrays.toString(c));

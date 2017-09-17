@@ -1,15 +1,13 @@
 package cc.redberry.combinatorics;
 
 /**
- * This class represents iterator over all possible permutations of specified
- * dimension written in one-line notation. Number of all permutations of dimension
- * D is D!.
+ * Iterator over all possible permutations.
  *
  * <p>Example
  * <code><pre>
- *      IntPermutationsGenerator ig = new IntPermutationsGenerator(3);
- *      while (ig.hasNext())
- *          System.out.println(Arrays.toString(ig.next()))
+ * IntPermutations its = new IntPermutations(3);
+ * while (its.hasNext())
+ *     System.out.println(Arrays.toString(its.next()))
  * </pre></code>
  * The result will be
  * <code><pre>
@@ -20,23 +18,20 @@ package cc.redberry.combinatorics;
  *      [2, 0, 1]
  *      [2, 1, 0]
  * </pre></code>
- * It is also possible to iterate in the opposite direction via {@link #previous()} method.</p>
+ * It is also possible to iterate in the opposite direction via {@link #previous()} method.
  *
- * <p>The iterator is implemented such that each next combination will be calculated only on
- * the invocation of method {@link #next()}.</p>
+ * <p>The iterator is implemented such that each next combination will be calculated only on the invocation of method
+ * {@link #next()}.
  *
  * <p><b>Note:</b> method {@link #next()} returns the same reference on each invocation.
- * So, if it is needed not only to obtain the information from {@link #next()}, but also save the result,
- * it is necessary to clone the returned array.</p>
  *
  * @author Dmitry Bolotin
  * @author Stanislav Poslavsky
  * @since 1.0
  */
-public final class IntPermutationsGenerator
-        extends IntCombinatorialGenerator
-        implements IntCombinatorialPort {
-
+public final class IntPermutations
+        implements CombinatorialIterator<int[]> {
+    private static final long serialVersionUID = 783197504482907083L;
     final int[] permutation;
     private boolean onFirst = true;
     private final int size;
@@ -46,7 +41,7 @@ public final class IntPermutationsGenerator
      *
      * @param dimension dimension of permutations
      */
-    public IntPermutationsGenerator(int dimension) {
+    public IntPermutations(int dimension) {
         permutation = new int[dimension];
         for (int i = 0; i < dimension; ++i)
             permutation[i] = i;
@@ -54,19 +49,17 @@ public final class IntPermutationsGenerator
     }
 
     /**
-     * Construct iterator over permutations with specified permutation at
-     * the start. If starting permutation is not identity, the iterator will not
-     * iterate over all possible permutations, but only from starting permutation up to the
-     * last permutation, which is [size-1,size-2,....1,0].
+     * Construct iterator over permutations with specified permutation at the start. If starting permutation is not
+     * identity, the iterator will not iterate over all possible permutations, but only from starting permutation up to
+     * the last permutation, which is [size-1,size-2,....1,0].
      *
-     * <p><b>Note:</b> parameter {@code permutation} is
-     * not copied in constructor and the same instance will be used during iteration.</p>
+     * <p><b>Note:</b> parameter {@code permutation} is not copied in constructor and the same instance will be used
+     * during iteration.</p>
      *
      * @param permutation starting permutation
-     * @throws IllegalArgumentException if permutation is inconsistent with
-     *                                  <i>one-line</i> notation
+     * @throws IllegalArgumentException if permutation is inconsistent with <i>one-line</i> notation
      */
-    public IntPermutationsGenerator(int[] permutation) {
+    public IntPermutations(int[] permutation) {
         this.permutation = permutation;
         this.size = permutation.length;
         for (int i = 0; i < size - 1; ++i) {
@@ -80,19 +73,13 @@ public final class IntPermutationsGenerator
     }
 
     @Override
-    public int[] take() {
-        return hasNext() ? next() : null;
-    }
-
-    @Override
     public boolean hasNext() {
         return !isLast() || onFirst;
     }
 
     /**
-     * Returns {@code true} if the iteration has more elements, iterating in
-     * back order. (In other words, returns {@code true} if {@link #previous()} would
-     * return an element rather than throwing an exception.)
+     * Returns {@code true} if the iteration has more elements, iterating in back order. (In other words, returns {@code
+     * true} if {@link #previous()} would return an element rather than throwing an exception.)
      *
      * @return {@code true} if the iteration has more elements
      */
@@ -223,7 +210,7 @@ public final class IntPermutationsGenerator
     }
 
     @Override
-    public int[] getReference() {
+    public int[] current() {
         return permutation;
     }
 }

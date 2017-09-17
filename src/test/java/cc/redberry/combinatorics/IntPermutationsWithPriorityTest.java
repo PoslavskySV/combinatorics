@@ -13,14 +13,14 @@ import static org.junit.Assert.assertTrue;
  * @author Dmitry Bolotin
  * @author Stanislav Poslavsky
  */
-public class IntPriorityPermutationsGeneratorTest {
-    public IntPriorityPermutationsGeneratorTest() {
+public class IntPermutationsWithPriorityTest {
+    public IntPermutationsWithPriorityTest() {
     }
 
     @Ignore
     @Test
     public void test1() {
-        IntPriorityPermutationsGenerator generator = new IntPriorityPermutationsGenerator(3);
+        IntPermutationsWithPriority generator = new IntPermutationsWithPriority(3);
         int[] p;
         while ((p = generator.take()) != null)
             System.out.println(Arrays.toString(p));
@@ -32,7 +32,7 @@ public class IntPriorityPermutationsGeneratorTest {
     @Ignore
     @Test
     public void test2() {
-        IntPriorityPermutationsGenerator generator = new IntPriorityPermutationsGenerator(3);
+        IntPermutationsWithPriority generator = new IntPermutationsWithPriority(3);
         int[] p;
         while ((p = generator.take()) != null) {
             if (p[0] == 1)
@@ -83,7 +83,7 @@ public class IntPriorityPermutationsGeneratorTest {
                                     continue OUTER;
                             break;
                         }
-            IntPriorityPermutationsGenerator generator = new IntPriorityPermutationsGenerator(dimm);
+            IntPermutationsWithPriority generator = new IntPermutationsWithPriority(dimm);
             //adding priorities
             for (int i = 0; i < pCount; ++i)
                 for (int j = 0; j <= pCount - i; ++j) {
@@ -96,7 +96,7 @@ public class IntPriorityPermutationsGeneratorTest {
         }
     }
 
-    private void addPriority(IntPriorityPermutationsGenerator generator, int[] permutation) {
+    private void addPriority(IntPermutationsWithPriority generator, int[] permutation) {
         int[] p;
         while ((p = generator.take()) != null)
             if (Arrays.equals(p, permutation)) {

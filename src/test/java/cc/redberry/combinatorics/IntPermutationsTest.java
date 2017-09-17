@@ -11,7 +11,7 @@ import java.util.Set;
  * @author Dmitry Bolotin
  * @author Stanislav Poslavsky
  */
-public class IntPermutationsGeneratorTest {
+public class IntPermutationsTest {
 
     @Test
     public void test1() {
@@ -37,7 +37,7 @@ public class IntPermutationsGeneratorTest {
                 return Arrays.hashCode(data);
             }
         }
-        IntPermutationsGenerator ig = new IntPermutationsGenerator(8);
+        IntPermutations ig = new IntPermutations(8);
         int num = 0;
         Set<IntArray> set = new HashSet<>(40320);
         IntArray a;
@@ -52,7 +52,7 @@ public class IntPermutationsGeneratorTest {
 
     @Test
     public void test2() {
-        IntPermutationsGenerator ig = new IntPermutationsGenerator(0);
+        IntPermutations ig = new IntPermutations(0);
         Assert.assertTrue(ig.hasNext());
         Assert.assertTrue(ig.next().length == 0);
         Assert.assertTrue(!ig.hasNext());

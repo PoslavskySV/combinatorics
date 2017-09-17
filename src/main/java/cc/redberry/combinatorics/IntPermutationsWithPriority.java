@@ -3,29 +3,28 @@ package cc.redberry.combinatorics;
 import java.util.*;
 
 /**
- * This class represents iterator over all possible permutations of specified
- * dimension written in one-line notation (see {@link IntPermutationsGenerator})
- * and allows to specify the niceness of a particular permutations,
- * so they will appear earlier in the iteration if iterator was reset via {@link #reset()}.
+ * Iterator over all possible permutations of specified that allows to adjust the "niceness" of particular permutations,
+ * such they will appear earlier in the iteration if iterator was reset via {@link #reset()}.
  *
  * @author Dmitry Bolotin
  * @author Stanislav Poslavsky
- * @see IntPermutationsGenerator
+ * @see IntPermutations
  * @since 1.0
  */
-public final class IntPriorityPermutationsGenerator implements IntCombinatorialPort {
-    private final IntPermutationsGenerator generator;
+public final class IntPermutationsWithPriority implements IntCombinatorialPort {
+    private static final long serialVersionUID = -8335112838485172963L;
+    private final IntPermutations generator;
     private final List<PermutationPriorityTuple> tuples = new ArrayList<>();
     private final Set<PermutationPriorityTuple> set = new HashSet<>();
     private int[] last = null;
     private int lastTuplePointer = 0;
 
-    public IntPriorityPermutationsGenerator(int dimension) {
-        generator = new IntPermutationsGenerator(dimension);
+    public IntPermutationsWithPriority(int dimension) {
+        generator = new IntPermutations(dimension);
     }
 
-    public IntPriorityPermutationsGenerator(int[] initialPermutation) {
-        generator = new IntPermutationsGenerator(initialPermutation);
+    public IntPermutationsWithPriority(int[] initialPermutation) {
+        generator = new IntPermutations(initialPermutation);
     }
 
     @Override

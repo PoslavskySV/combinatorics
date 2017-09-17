@@ -1,41 +1,37 @@
 package cc.redberry.combinatorics;
 
 /**
- * This class represents an iterator over all unordered combinations (i.e. [0,1] and [1,0] are
- * considered as same, so only [0,1] will appear in the sequence) of {@code k} numbers, which can be chosen from the set of
- * {@code n} numbers (0,1,2,...,{@code n}). The total number of such combinations is a
- * binomial coefficient {@code n!/(k!(n-k)!)}. Each returned array is sorted.
+ * Iterator over all unordered combinations (i.e. [0,1] and [1,0] are considered as same, so only [0,1] will appear in
+ * the sequence) of {@code k} numbers, which can be chosen from the set of {@code n} numbers (0,1,2,...,{@code n}). The
+ * total number of such combinations is a binomial coefficient {@code n!/(k!(n-k)!)}. Each returned array is sorted.
  *
- * <p>The iterator is implemented such that each next combination will be calculated only on
- * the invocation of method {@link #next()}.</p>
+ * <p>The iterator is implemented such that each next combination will be calculated only on the invocation of method
+ * {@link #next()}.
  *
  * <p><b>Note:</b> method {@link #next()} returns the same reference on each invocation.
- * So, if it is needed not only to obtain the information from {@link #next()}, but also save the result,
- * it is necessary to clone the returned array.</p>
  *
  * @author Dmitry Bolotin
  * @author Stanislav Poslavsky
+ * @see IntCombinationsWithPermutations
  * @since 1.0
  */
-public final class IntCombinationsGenerator
-        extends IntCombinatorialGenerator
-        implements IntCombinatorialPort {
+public final class IntCombinations
+        extends IntCombinatorialIterator {
+    private static final long serialVersionUID = -2446688661078690111L;
     final int[] combination;
     private final int n, k;
     private boolean onFirst = true;
 
-    public IntCombinationsGenerator(int n, int k) {
+    /**
+     * Constructs the iterator with the desired n and k
+     */
+    public IntCombinations(int n, int k) {
         if (n < k)
             throw new IllegalArgumentException(" n < k ");
         this.n = n;
         this.k = k;
         this.combination = new int[k];
         reset();
-    }
-
-    @Override
-    public int[] take() {
-        return hasNext() ? next() : null;
     }
 
     @Override
@@ -82,7 +78,7 @@ public final class IntCombinationsGenerator
     }
 
     @Override
-    public int[] getReference() {
+    public int[] current() {
         return combination;
     }
 }

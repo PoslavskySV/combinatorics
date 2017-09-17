@@ -13,14 +13,14 @@ import static cc.redberry.combinatorics.Combinatorics.arrayComparator;
  * @author Dmitry Bolotin
  * @author Stanislav Poslavsky
  */
-public class IntDistinctTuplesPortTest {
+public class IntDistinctTuplesTest {
     @Test
     public void test1() {
         int[] a1 = {1, 1};
         int[] a2 = {1, 1};
         int[] a3 = {1};
         int[][] aa = {a1, a2, a3};
-        IntDistinctTuplesPort dcp = new IntDistinctTuplesPort(aa);
+        IntDistinctTuples dcp = new IntDistinctTuples(aa);
         Assert.assertEquals(dcp.take(), null);
     }
 
@@ -30,7 +30,7 @@ public class IntDistinctTuplesPortTest {
         int[] a2 = {2, 4};
         int[] a3 = {3, 4, 5};
         int[][] aa = {a1, a2, a3};
-        IntDistinctTuplesPort dcp = new IntDistinctTuplesPort(aa);
+        IntDistinctTuples dcp = new IntDistinctTuples(aa);
         int[] c;
         Set<int[]> expected = new TreeSet<>(arrayComparator);
         expected.add(new int[]{1, 2, 3});
@@ -52,7 +52,7 @@ public class IntDistinctTuplesPortTest {
         int[] a2 = {1, 2, 3};
         int[] a3 = {1, 2, 3};
         int[][] aa = {a1, a2, a3};
-        IntDistinctTuplesPort dcp = new IntDistinctTuplesPort(aa);
+        IntDistinctTuples dcp = new IntDistinctTuples(aa);
         int[] c;
         Set<int[]> actual = new TreeSet<>(arrayComparator);
         while ((c = dcp.take()) != null)
@@ -60,7 +60,7 @@ public class IntDistinctTuplesPortTest {
 
         int[] arr = {1, 2, 3};
         Set<int[]> expected = new TreeSet<>(arrayComparator);
-        for (int[] a : Combinatorics.combinations(3, 3))
+        for (int[] a : Combinatorics.combinationsWithPermutations(3, 3))
             expected.add(permute(arr, a));
 
         Assert.assertEquals(actual, expected);
@@ -72,7 +72,7 @@ public class IntDistinctTuplesPortTest {
         int[] a2 = {3};
         int[] a3 = {1, 2};
         int[][] aa = {a1, a2, a3};
-        IntDistinctTuplesPort dcp = new IntDistinctTuplesPort(aa);
+        IntDistinctTuples dcp = new IntDistinctTuples(aa);
         Assert.assertTrue(Arrays.equals(new int[]{1, 3, 2}, dcp.take()));
         Assert.assertTrue(dcp.take() == null);
     }
@@ -81,7 +81,7 @@ public class IntDistinctTuplesPortTest {
     public void test5() {
         int[] a1 = {1, 2, 3};
         int[] a2 = {2, 3};
-        IntDistinctTuplesPort dcp = new IntDistinctTuplesPort(a1, a2);
+        IntDistinctTuples dcp = new IntDistinctTuples(a1, a2);
         int[] tuple;
         Set<int[]> produced = new TreeSet<>(arrayComparator);
         Set<int[]> expected = new TreeSet<>(arrayComparator);
@@ -92,6 +92,14 @@ public class IntDistinctTuplesPortTest {
         while ((tuple = dcp.take()) != null)
             produced.add(tuple.clone());
         Assert.assertEquals(expected, produced);
+    }
+
+    @Test
+    public void test6() throws Exception {
+        IntDistinctTuples tuples = new IntDistinctTuples(new int[]{0, 1, 2, 3});
+        int[] r;
+        while ((r = tuples.take()) != null)
+            System.out.println(Arrays.toString(r));
     }
 
     static int[] permute(int[] array, final int[] permutation) {

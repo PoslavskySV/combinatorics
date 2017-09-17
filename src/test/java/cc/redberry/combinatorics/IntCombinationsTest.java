@@ -13,7 +13,7 @@ import static cc.redberry.combinatorics.Combinatorics.arrayComparator;
  * @author Dmitry Bolotin
  * @author Stanislav Poslavsky
  */
-public class IntCombinationsGeneratorTest {
+public class IntCombinationsTest {
     @Test
     public void test0() {
         Set<int[]> expected = new TreeSet<>(arrayComparator);
@@ -29,7 +29,7 @@ public class IntCombinationsGeneratorTest {
         expected.add(new int[]{2, 3, 4});
 
         Set<int[]> actual = new TreeSet<>(arrayComparator);
-        for (int[] combination : new IntCombinationsGenerator(5, 3))
+        for (int[] combination : new IntCombinations(5, 3))
             actual.add(combination.clone());
 
         Assert.assertEquals(actual, expected);
@@ -37,7 +37,7 @@ public class IntCombinationsGeneratorTest {
 
     @Test
     public void test1() {
-        IntCombinationsGenerator gen = new IntCombinationsGenerator(1, 1);
+        IntCombinations gen = new IntCombinations(1, 1);
         Assert.assertTrue(gen.hasNext());
         Assert.assertTrue(Arrays.equals(new int[]{0}, gen.next()));
         Assert.assertTrue(!gen.hasNext());
