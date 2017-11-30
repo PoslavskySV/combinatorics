@@ -56,8 +56,6 @@ public final class Combinatorics {
      * @see IntCompositions
      */
     public static CombinatorialIterator<int[]> compositions(int integer, int nPartitions) {
-        if (integer < nPartitions)
-            throw new IllegalArgumentException();
         return new IntCombinatorialPort.Iterator(new IntCompositions(integer, nPartitions));
     }
 
